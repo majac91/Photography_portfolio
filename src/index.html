@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;1,100&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;1,100&display=swap"
+      rel="stylesheet"
+    />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      media="screen"
+      href="./icons/font/flaticon.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.scss" />
+    <script
+      type="text/javascript"
+      src="https://npmcdn.com/parse/dist/parse.min.js"
+    ></script>
+    <!-- <script src="https://unpkg.com/magic-grid/dist/magic-grid.min.js"></script> -->
+    <title>places-been</title>
+  </head>
+  <body>
+    <!-- N A V B A R  -->
+    <nav class="navbar">
+      <ul class="navbar__links">
+        <li class="navbar__list">
+          <a class="navbar__link" href="#">Hey,</a>
+        </li>
+        <li class="navbar__list">
+          <a class="navbar__link" href="">Stories,</a>
+        </li>
+        <li class="navbar__list">
+          <a class="navbar__link" href="#">About</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- H E A D E R  -->
+    <header class="header">
+      <!-- slideshow -->
+      <section class="container--slideshow">
+        <div class="slides">
+          <div class="slide slide-1">
+            <img src="./img/photo1.jpg" alt="" />
+          </div>
+          <div class="slide slide-2">
+            <img src="./img/photo8.jpg" alt="" />
+          </div>
+          <div class="slide slide-3">
+            <img src="./img/photo25.jpg" alt="" />
+          </div>
+          <div class="slide slide-4">
+            <img src="./img/photo0.jpg" alt="" />
+          </div>
+        </div>
+        <div class="slide-controls">
+          <button class="prev-btn" aria-label="previous photo"></button>
+          <button class="next-btn" aria-label="next photo"></button>
+        </div>
+      </section>
+      <!-- headline -->
+      <section class="heading container--heading">
+        <h1 class="heading--visually-hidden">
+          Maja Cvetkovic - Photographic Journal
+        </h1>
+        <p class="heading__subtitle">Hey, welcome and take a look</p>
+        <p class="heading__title">
+          This is a photographic journal of
+          <span class="heading__name">Maja Cvetkovic</span>, an amateur
+          photographer based in Nis, Serbia.
+        </p>
+        <label class="scroll__label">Scroll down</label>
+        <button class="scroll__btn">
+          <a href="#main-btns"
+            ><img
+              class="scroll__icon"
+              src="./icons/png/next.png"
+              alt="scroll-down-icon"
+            />
+          </a>
+        </button>
+      </section>
+    </header>
+
+    <!--M A I N -->
+    <!-- toggle view buttons -->
+    <div id="main-btns" class="main-btns">
+      <button class="btn btn__all" type="button">All</button>
+      <button class="btn btn__home" type="button">Home</button>
+      <button class="btn btn__places" type="button">Places</button>
+      <button class="btn btn__add flaticon-016-add" type="button"></button>
+    </div>
+
+    <!--add new photo form -->
+    <form id="add-photo-form" class="form form-state--closed">
+      <!-- caption -->
+      <label for="inputCaption" class="form__label">Caption</label>
+      <input
+        type="text"
+        name="text"
+        id="inputCaption"
+        required
+        class="form__input"
+      />
+      <!-- date -->
+      <label for="inputDate" class="form__label">Date</label>
+      <input
+        type="date"
+        name="text"
+        id="inputDate"
+        required
+        class="form__input"
+      />
+      <!-- photo-->
+      <label class="form__label" for="inputImg">Photo</label>
+      <input type="file" id="inputImg" required class="form__input" />
+      <!-- radio buttons-->
+      <div class="radio-buttons">
+        <input id="rd-home" name="btn" type="radio" value="Home" />
+        <label for="rd-home" class="radio-label">Home</label>
+        <input id="rd-places" name="btn" type="radio" value="Places" />
+        <label for="rd-places" class="radio-label">Places</label>
+      </div>
+      <!-- Upload button -->
+      <button type="submit" id="upload" class="form__submit">Upload</button>
+      <!-- Close button -->
+      <button
+        type="button"
+        id="close"
+        class="form__close flaticon-001-cancel-3"
+      ></button>
+    </form>
+
+    <!-- gallery -->
+    <main class="gallery container" id="gallery"></main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
