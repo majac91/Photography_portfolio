@@ -129,12 +129,12 @@ function renderDestination(destination) {
   // open edit menu
   editBtn.addEventListener("click", () => {
     elDestination.classList.toggle("edit__active");
-    editBtn.style.opacity = "0";
+    editBtn.classList.toggle("edit__btn-visible");
   });
 
   closeBtn.addEventListener("click", () => {
     elDestination.classList.toggle("edit__active");
-    editBtn.style.opacity = "1";
+    editBtn.classList.toggle("edit__btn-visible");
   });
 
   // Return the destination HTML
@@ -157,12 +157,12 @@ function setActive() {
       const current = event.target;
 
       if (activeBtn) {
-        activeBtn.classList.remove("active-button");
+        activeBtn.classList.remove("active-btn");
         activeBtn.setAttribute("aria-pressed", false);
       }
 
       current.setAttribute("aria-pressed", true);
-      current.classList.add("active-button");
+      current.classList.add("active-btn");
 
       activeBtn = current;
     });
@@ -187,11 +187,11 @@ function showAll() {
 }
 
 function openForm() {
-  form.classList.add("form-state--open");
+  form.classList.add("add-photo-form--open");
 }
 
 function closeForm() {
-  form.classList.remove("form-state--open");
+  form.classList.remove("add-photo-form--open");
 }
 
 //shrink header on scroll

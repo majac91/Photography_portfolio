@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;1,100&display=swap"
       rel="stylesheet"
@@ -12,38 +11,30 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;1,100&display=swap"
       rel="stylesheet"
     />
-    <!-- icons -->
     <link
       rel="stylesheet"
       media="screen"
       href="./icons/font/flaticon.css"
       type="text/css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-      crossorigin="anonymous"
-    />
     <link rel="stylesheet" href="./css/style.scss" />
     <script
       type="text/javascript"
       src="https://npmcdn.com/parse/dist/parse.min.js"
     ></script>
-    <!-- <script src="https://unpkg.com/magic-grid/dist/magic-grid.min.js"></script> -->
-    <title>places-been</title>
+    <title>Maja's photography</title>
   </head>
   <body>
     <!-- N A V B A R  -->
     <nav class="navbar">
       <ul class="navbar__links">
-        <li class="navbar__list">
+        <li class="navbar__item">
           <a class="navbar__link" href="#">Hey,</a>
         </li>
-        <li class="navbar__list">
+        <li class="navbar__item">
           <a class="navbar__link" href="">Stories,</a>
         </li>
-        <li class="navbar__list">
+        <li class="navbar__item">
           <a class="navbar__link" href="#">About</a>
         </li>
       </ul>
@@ -73,7 +64,7 @@
         </div>
       </section>
       <!-- headline -->
-      <section class="heading container--heading">
+      <section class="heading">
         <h1 class="heading--visually-hidden">
           Maja Cvetkovic - Photographic Journal
         </h1>
@@ -83,11 +74,11 @@
           <span class="heading__name">Maja Cvetkovic</span>, an amateur
           photographer based in Nis, Serbia.
         </p>
-        <label class="scroll__label">Scroll down</label>
-        <button class="scroll__btn">
+        <label class="heading__scroll-label">Scroll down</label>
+        <button class="heading__scroll-btn">
           <a href="#main-btns"
             ><img
-              class="scroll__icon"
+              class="heading__scroll-icon"
               src="./icons/png/next.png"
               alt="scroll-down-icon"
             />
@@ -97,7 +88,7 @@
     </header>
 
     <!--M A I N -->
-    <!-- toggle view buttons -->
+    <!-- display buttons -->
     <div id="main-btns" class="main-btns">
       <button class="btn btn__all" type="button">All</button>
       <button class="btn btn__home" type="button">Home</button>
@@ -105,9 +96,8 @@
       <button class="btn btn__add flaticon-016-add" type="button"></button>
     </div>
 
-    <!--add new photo form -->
-    <form id="add-photo-form" class="form form-state--closed">
-      <!-- caption -->
+    <!--form -->
+    <form id="add-photo-form" class="form add-photo-form--closed">
       <label for="inputCaption" class="form__label">Caption</label>
       <input
         type="text"
@@ -116,7 +106,6 @@
         required
         class="form__input"
       />
-      <!-- date -->
       <label for="inputDate" class="form__label">Date</label>
       <input
         type="date"
@@ -125,28 +114,55 @@
         required
         class="form__input"
       />
-      <!-- photo-->
       <label class="form__label" for="inputImg">Photo</label>
-      <input type="file" id="inputImg" required class="form__input" />
-      <!-- radio buttons-->
-      <div class="radio-buttons">
+      <input
+        type="file"
+        id="inputImg"
+        required
+        class="form__input form__input-img"
+      />
+      <div class="radio-btns">
         <input id="rd-home" name="btn" type="radio" value="Home" />
         <label for="rd-home" class="radio-label">Home</label>
         <input id="rd-places" name="btn" type="radio" value="Places" />
         <label for="rd-places" class="radio-label">Places</label>
       </div>
-      <!-- Upload button -->
-      <button type="submit" id="upload" class="form__submit">Upload</button>
-      <!-- Close button -->
+      <button type="submit" id="upload" class="form__submit-btn">Upload</button>
       <button
         type="button"
         id="close"
-        class="form__close flaticon-001-cancel-3"
+        class="form__close-btn flaticon-001-cancel-3"
       ></button>
     </form>
 
     <!-- gallery -->
     <main class="gallery container" id="gallery"></main>
+
+    <!-- F O O T E R -->
+
+    <footer class="footer">
+      <div class="footer__copyright">
+        <p>&copy;Maja Cvetkovic</p>
+        <p>Content may not be used without written permission.</p>
+      </div>
+      <div class="footer__social">
+        <ul class="footer__social-links"></ul>
+        <li class="fotter__social-item">
+          <a
+            class="fotter__social-link"
+            href="https://www.instagram.com/majacv_/?hl=en"
+            >INSTAGRAM</a
+          >
+        </li>
+        <li class="fotter__social-item">
+          <a
+            class="footer__social-link"
+            href="mailto: majacvetkovic@outlook.com"
+            >EMAIL ME</a
+          >
+        </li>
+      </div>
+    </footer>
 
     <script src="main.js"></script>
   </body>

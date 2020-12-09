@@ -37,7 +37,6 @@ function bindEvents() {
   });
   nextBtn.addEventListener("click", moveToNextSlide);
   prevBtn.addEventListener("click", moveToPreviousSlide);
-  // document.addEventListener("resize", resizeSlide);
 }
 
 function render() {
@@ -50,12 +49,6 @@ window.onresize = function () {
   slideWidth = slides[index].clientWidth;
   return slideWidth;
 };
-
-// function resizeSlide() {
-//   slideWidth = slides[index].clientWidth;
-//   console.log(slideWidth);
-//   return slideWidth;
-// }
 
 //includes the first and the last clone
 const getSlides = () => document.querySelectorAll(".slide");
