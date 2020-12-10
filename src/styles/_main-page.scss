@@ -1,29 +1,17 @@
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-self: center;
+  height: 100vh;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-@font-face {
-  font-family: "TwCenW01-Medium";
-  src: url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.eot");
-  src: url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.eot?#iefix")
-      format("embedded-opentype"),
-    url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.woff2")
-      format("woff2");
-}
-
-@font-face {
-  font-family: "bimboballpoint";
-  src: url(../fonts/bimbo-ballpoint.ttf) format("truetype");
-}
-
-//Variables
-$grey: #b9b8ae;
-$text: black;
-$cursive: "bimboballpoint", sans-serif;
-$main-font: "TwCenW01-Medium", sans-serif;
-$header-font: "IBM Plex Serif";
 
 //Basic styles
 html {
@@ -307,7 +295,7 @@ button {
     height: 2rem;
     width: 2rem;
     display: inline-block;
-    background-image: url("../icons/png/edit1.png");
+    // background-image: url("./icons/png/edit1.png");
     background-size: cover;
   }
   &:hover {

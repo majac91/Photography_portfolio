@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "TwCenW01-Medium";
+  src: url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.eot");
+  src: url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.woff2")
+      format("woff2");
+}
+
+@font-face {
+  font-family: "bimboballpoint";
+  src: url(../fonts/bimbo-ballpoint.ttf) format("truetype");
+}
+
+@import "variables";
+@import "main-page";
