@@ -15,6 +15,9 @@ import slide3 from "./images/photo8.JPG";
 import slide4 from "./images/photo25.JPG";
 
 import downArrow from "./icons/png/next.png";
+import editIcon from "./icons/png/edit1.png";
+import addIcon from "./icons/png/016-add.png";
+import closeIcon from "./icons/png/001-cancel-3.png";
 
 const firstSlide = document.querySelector(".slide-1 img");
 firstSlide.src = slide1;
@@ -26,3 +29,13 @@ const fourthSlide = document.querySelector(".slide-4 img");
 fourthSlide.src = slide4;
 const scrollDown = document.querySelector(".heading__scroll-icon");
 scrollDown.src = downArrow;
+
+const addBtn = document.querySelector(".btn__add");
+const iconSpan = document.createElement("img");
+addBtn.appendChild(iconSpan);
+iconSpan.src = addIcon;
+
+const closeBtn = document.querySelector(".form__close-btn");
+const closeIconEl = document.createElement("img");
+closeBtn.appendChild(closeIconEl);
+closeIconEl.src = closeIcon;

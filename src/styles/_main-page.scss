@@ -1,12 +1,3 @@
-#root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  align-self: center;
-  height: 100vh;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -92,7 +83,6 @@ button {
     text-transform: uppercase;
     opacity: 1;
     background: white;
-    //Clicked button
     .active-btn {
       border-bottom: 1px solid black;
       &:first-child,
@@ -100,6 +90,10 @@ button {
         border-bottom: none;
       }
     }
+  }
+  .btn__add > img {
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -148,13 +142,13 @@ button {
     }
     .form__close-btn {
       background: darken($color: $grey, $amount: 5%);
-      &::before {
-        content: "\f100";
-        display: block;
-        position: relative;
-        left: 20rem;
-        bottom: 38rem;
-      }
+    }
+    .form__close-btn > img {
+      position: relative;
+      left: 20rem;
+      bottom: 38rem;
+      width: 2rem;
+      height: 2rem;
     }
   }
 }
@@ -347,7 +341,7 @@ button {
     // animation: fadeUp 0.5s ease-in-out;
   }
   //buttons
-  .overlay__close.flaticon-001-cancel-3 {
+  .overlay__close.form__close-btn {
     margin-right: 2.5rem;
     background-color: transparent;
   }
