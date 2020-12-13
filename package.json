@@ -1,5 +1,5 @@
 {
-  "name": "Photography_portfolio",
+  "name": "photography_portfolio",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/majac91/Travel_journal.git"
+    "url": "git+https://github.com/majac91/Photography_portfoliol.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/majac91/Travel_journal/issues"
+    "url": "https://github.com/majac91/Photography_portfolio/issues"
   },
-  "homepage": "https://github.com/majac91/Travel_journal#readme",
+  "homepage": "https://github.com/majac91/Photography_portfolio#readme",
   "dependencies": {
     "medium-style-confirm": "^0.4.6",
     "moment": "^2.27.0",
