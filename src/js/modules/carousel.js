@@ -40,6 +40,8 @@ function bindEvents() {
 }
 
 function render() {
+  firstClone.classList.add("first-clone");
+  lastClone.classList.add("last-clone");
   slideContainer.append(firstClone);
   slideContainer.prepend(lastClone);
 }
