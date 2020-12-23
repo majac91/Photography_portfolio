@@ -99,4 +99,5 @@ function init() {
   startSlide();
 }
 
-init();
+const module = { init };
+export default module;
