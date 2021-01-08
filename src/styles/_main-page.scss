@@ -4,27 +4,6 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "TwCenW01-Medium";
-  src: url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.eot");
-  src: url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.eot?#iefix")
-      format("embedded-opentype"),
-    url("//db.onlinewebfonts.com/t/c862d8098ce50a7dc042ebbb9b94bbc8.woff2")
-      format("woff2");
-}
-
-@font-face {
-  font-family: "bimboballpoint";
-  src: url(../fonts/bimbo-ballpoint.ttf) format("truetype");
-}
-
-//Variables
-$grey: #b9b8ae;
-$text: black;
-$cursive: "bimboballpoint", sans-serif;
-$main-font: "TwCenW01-Medium", sans-serif;
-$header-font: "IBM Plex Serif";
-
 //Basic styles
 html {
   font-size: 10px;
@@ -104,7 +83,6 @@ button {
     text-transform: uppercase;
     opacity: 1;
     background: white;
-    //Clicked button
     .active-btn {
       border-bottom: 1px solid black;
       &:first-child,
@@ -112,6 +90,10 @@ button {
         border-bottom: none;
       }
     }
+  }
+  .btn__add > img {
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -160,13 +142,13 @@ button {
     }
     .form__close-btn {
       background: darken($color: $grey, $amount: 5%);
-      &::before {
-        content: "\f100";
-        display: block;
-        position: relative;
-        left: 20rem;
-        bottom: 38rem;
-      }
+    }
+    .form__close-btn > img {
+      position: relative;
+      left: 20rem;
+      bottom: 38rem;
+      width: 2rem;
+      height: 2rem;
     }
   }
 }
@@ -301,6 +283,7 @@ button {
   top: -10rem;
   right: 1rem;
   float: right;
+
   &::before {
     //edit icon
     content: "";
@@ -359,7 +342,7 @@ button {
     // animation: fadeUp 0.5s ease-in-out;
   }
   //buttons
-  .overlay__close.flaticon-001-cancel-3 {
+  .overlay__close.form__close-btn {
     margin-right: 2.5rem;
     background-color: transparent;
   }

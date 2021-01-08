@@ -12,6 +12,17 @@ let formState = {
   photo: null,
 };
 
+function attachImgs() {
+  const addBtn = document.querySelector(".btn__add");
+  const iconSpan = document.createElement("img");
+  addBtn.appendChild(iconSpan);
+  iconSpan.src = require("../../icons/png/016-add.png");
+  const closeBtn = document.querySelector(".form__close-btn");
+  const closeIconEl = document.createElement("img");
+  closeBtn.appendChild(closeIconEl);
+  closeIconEl.src = require("../../icons/png/001-cancel-3.png");
+}
+
 function cacheDom() {
   form = document.getElementById("add-photo-form");
   radioBtns = document.querySelectorAll("input[type=radio]");
@@ -64,6 +75,7 @@ function initRadioBtn() {
 }
 
 function init() {
+  attachImgs();
   cacheDom();
   bindEvents();
   initRadioBtn();
