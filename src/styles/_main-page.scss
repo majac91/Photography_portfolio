@@ -283,13 +283,14 @@ button {
   top: -10rem;
   right: 1rem;
   float: right;
+
   &::before {
     //edit icon
     content: "";
     height: 2rem;
     width: 2rem;
     display: inline-block;
-    // background-image: url("./icons/png/edit1.png");
+    background-image: url("../icons/png/edit1.png");
     background-size: cover;
   }
   &:hover {

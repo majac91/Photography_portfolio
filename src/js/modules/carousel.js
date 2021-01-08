@@ -8,6 +8,21 @@ let slideWidth;
 let firstClone;
 let lastClone;
 
+function attachImgs() {
+  // The images attach must be done before the rest of JS manipulation
+  const firstSlide = document.querySelector(".slide-1 img");
+  firstSlide.src = require("../../images/photo0.jpg");
+  const secondSlide = document.querySelector(".slide-2 img");
+  secondSlide.src = require("../../images/photo1.jpg");
+  const thirdSlide = document.querySelector(".slide-3 img");
+  thirdSlide.src = require("../../images/photo8.jpg");
+  const fourthSlide = document.querySelector(".slide-4 img");
+  fourthSlide.src = require("../../images/photo25.jpg");
+
+  const scrollDown = document.querySelector(".heading__scroll-icon");
+  scrollDown.src = require("../../icons/png/next.png");
+}
+
 function cacheDom() {
   slideContainer = document.querySelector(".slides");
   nextBtn = document.querySelector(".next-btn");
@@ -77,9 +92,12 @@ function startSlide() {
 }
 
 function init() {
+  attachImgs();
   cacheDom();
   bindEvents();
   render();
   startSlide();
 }
-init();
+
+const module = { init };
+export default module;
