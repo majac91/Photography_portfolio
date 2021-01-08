@@ -9,11 +9,16 @@ This is the project I am working on as a part of the JavaScript learning process
 
 Some of the objectives include: 
 
-:black_square_button:   learn React
+- [ ]   learn React
 
-:black_square_button:   refactor using React
 
-:black_square_button:   publish
+- [ ]   refactor using React
+
+
+- [ ]   add masonary grid
+
+
+- [ ]   publish
 
 
 ## Installation
