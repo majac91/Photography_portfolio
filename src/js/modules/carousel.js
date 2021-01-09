@@ -11,7 +11,7 @@ let lastClone;
 function attachImgs() {
   // The images attach must be done before the rest of JS manipulation
   const firstSlide = document.querySelector(".slide-1 img");
-  firstSlide.src = require("../../images/photo0.jpg");
+  firstSlide.src = require("../../images/photo0.jpg"); //path fix
   const secondSlide = document.querySelector(".slide-2 img");
   secondSlide.src = require("../../images/photo1.jpg");
   const thirdSlide = document.querySelector(".slide-3 img");
