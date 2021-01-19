@@ -1,8 +1,85 @@
-import React from "react";
+import React, { useState, createRef, useLayoutEffect } from "react";
+import closebtn from "../icons/png/001-cancel-3.png";
+import Parse from "parse";
 
-export default function Form(props) {
+export default function Form({ setOpenForm, openForm }) {
+  const [caption, setCaption] = useState("caption");
+  const [date, setDate] = useState("date");
+  const [url, setUrl] = useState();
+  const [location, setLocation] = useState();
+  const [galleryItem, seGalleryItem] = useState({});
+  const fileInput = React.createRef();
+
+  useLayoutEffect(() => {
+    Parse.initialize(
+      "vmgVvg3aF82Lhxcm97idm9UCLJGSHcvEzLmXxD22",
+      "0ZzBp7Szs8vOyijUakZHud8WaxnT1taYtVKSJ6Ha"
+    );
+    Parse.serverURL = "https://parseapi.back4app.com/";
+  }, []);
+
+  const handleCaptionInput = (e) => {
+    setCaption(e.target.value);
+    seGalleryItem({
+      ...galleryItem,
+      caption: caption,
+      photoId: Math.round(Math.random() * 100000),
+    });
+  };
+  const handleDateInput = (e) => {
+    setDate(e.target.value);
+    seGalleryItem({ ...galleryItem, date: date });
+  };
+
+  const handleFileInput = (e) => {
+    setUrl(fileInput.current.files[0].name);
+    seGalleryItem({ ...galleryItem, url: url });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(galleryItem);
+    addPhoto();
+  };
+
+  async function addPhoto() {
+    const Gallery = Parse.Object.extend("Gallery");
+    const gallery = new Gallery();
+    const base64 = window.btoa(url);
+    const parseFile = new Parse.File("photo.jpg", { base64: base64 });
+
+    try {
+      await gallery.save({
+        caption: caption,
+        date: date,
+        home: location,
+        photo: parseFile,
+        photoId: galleryItem.photoId,
+      });
+      console.log("The object was added successfully.");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleRadioBtns = (e) => {
+    if (e.target.value === "Home") {
+      seGalleryItem({ ...galleryItem, home: true });
+      setLocation(true);
+    } else {
+      seGalleryItem({ ...galleryItem, home: false });
+      setLocation(false);
+    }
+  };
+
   return (
-    <form id="add-photo-form" className="form add-photo-form--closed">
+    <form
+      id="add-photo-form"
+      className={`form ${
+        openForm ? "add-photo-form--open" : "add-photo-form--closed"
+      }`}
+      onSubmit={handleFormSubmit}
+    >
       <label htmlFor="inputCaption" className="form__label">
         Caption
       </label>
@@ -10,6 +87,8 @@ export default function Form(props) {
         type="text"
         name="text"
         id="inputCaption"
+        onChange={handleCaptionInput}
+        value={caption}
         required
         className="form__input"
       />
@@ -20,6 +99,8 @@ export default function Form(props) {
         type="date"
         name="text"
         id="inputDate"
+        onChange={handleDateInput}
+        value={date}
         required
         className="form__input"
       />
@@ -29,10 +110,12 @@ export default function Form(props) {
       <input
         type="file"
         id="inputImg"
+        onChange={handleFileInput}
+        ref={fileInput}
         required
         className="form__input form__input-img"
       />
-      <div className="radio-btns">
+      <div onChange={handleRadioBtns} className="radio-btns">
         <input id="rd-home" name="btn" type="radio" value="Home" />
         <label htmlFor="rd-home" className="radio-label">
           Home
@@ -45,7 +128,14 @@ export default function Form(props) {
       <button type="submit" id="upload" className="form__submit-btn">
         Upload
       </button>
-      <button type="button" id="close" className="form__close-btn"></button>
+      <button
+        onClick={() => setOpenForm(!openForm)}
+        type="button"
+        id="close"
+        className="form__close-btn"
+      >
+        <img alt="add-button" src={closebtn}></img>
+      </button>
     </form>
   );
 }

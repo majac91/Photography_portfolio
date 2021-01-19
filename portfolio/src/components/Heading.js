@@ -17,7 +17,7 @@ export default function Heading(props) {
       <button className="heading__scroll-btn">
         <a href="#main-btns">
           <img
-            class="heading__scroll-icon"
+            className="heading__scroll-icon"
             alt="scroll-down-icon"
             src={scrollbtn}
           />

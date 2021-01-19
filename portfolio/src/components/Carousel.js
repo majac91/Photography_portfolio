@@ -4,17 +4,17 @@ export default function Carousel(props) {
   return (
     <>
       <section className="container--slideshow">
-        <div class="slides">
-          <div class="slide slide-1">
+        <div className="slides">
+          <div className="slide slide-1">
             <img src="" alt="" />
           </div>
-          <div class="slide slide-2">
+          <div className="slide slide-2">
             <img src="" alt="" />
           </div>
-          <div class="slide slide-3">
+          <div className="slide slide-3">
             <img src="" alt="" />
           </div>
-          <div class="slide slide-4">
+          <div className="slide slide-4">
             <img src="" alt="" />
           </div>
         </div>
