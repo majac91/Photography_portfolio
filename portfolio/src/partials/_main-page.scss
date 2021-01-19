@@ -1,0 +1,496 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//Basic styles
+html {
+  font-size: 10px;
+  font-family: $main-font;
+  color: $text;
+}
+
+.container {
+  width: 80vw;
+  margin: auto;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: $text;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+//Navbar
+.navbar {
+  width: 50.03vw;
+  font-size: 2.1rem;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  transition: all 0.4s ease;
+  font-family: $header-font;
+  font-style: normal;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  &__links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50vw;
+    height: 7rem;
+    background: $grey;
+  }
+  &__item {
+    margin: 0 2rem;
+    &:nth-of-type(1) {
+      //'Hey'
+      font-style: italic;
+    }
+  }
+  &--shrink {
+    font-size: 1.2rem;
+    height: 8rem;
+  }
+}
+
+//Gallery display buttons
+.main-btns {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 10rem;
+  padding-bottom: 3rem;
+  height: 5rem;
+  font-size: 1.8rem;
+  .btn {
+    display: inline-block;
+    margin: 2rem;
+    font-family: $main-font;
+    font-size: 1em;
+    font-weight: 100;
+    text-transform: uppercase;
+    opacity: 1;
+    background: white;
+    .active-btn {
+      border-bottom: 1px solid black;
+      &:first-child,
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .btn__add > img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+//Form
+.add-photo-form {
+  &--closed {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+  &--open {
+    visibility: visible;
+    background: darken($color: $grey, $amount: 5%);
+    z-index: 1000;
+    font-size: 1.9rem;
+    position: fixed;
+    top: 20vh;
+    bottom: 20vh;
+    left: 30vw;
+    right: 30vw;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .form__input {
+      border: none;
+      padding: 0.5rem;
+    }
+    .form__input-img {
+      width: 20rem;
+    }
+    .form__label,
+    .form__radio-btns,
+    .form__submit-btn {
+      margin-top: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .form__submit-btn {
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 1rem 2.5rem;
+      font-size: 1.5rem;
+      background: darken($color: $grey, $amount: 10%);
+    }
+    .form__close-btn {
+      background: darken($color: $grey, $amount: 5%);
+    }
+    .form__close-btn > img {
+      position: relative;
+      left: 20rem;
+      bottom: 38rem;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+//Header
+.header {
+  background: $grey;
+  display: flex;
+}
+
+.heading {
+  opacity: 0;
+  animation: fadeUp 5s forwards;
+  z-index: 2;
+  display: flex;
+  margin: auto;
+  height: 70vh;
+  width: 40vw;
+  font-family: $header-font;
+  font-weight: 100;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  &__subtitle {
+    animation: fadeUp 2s forwards;
+    font-size: 2rem;
+    font-style: italic;
+  }
+  &__title {
+    font-size: 3.8rem;
+  }
+  &__name {
+    font-style: italic;
+    font-size: 3.5rem;
+  }
+  &__scroll-label {
+    // arrow
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+  &__scroll-btn {
+    background: $grey;
+  }
+  &__scroll-icon {
+    animation: pulse 2s infinite;
+  }
+}
+
+.heading--visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+//Slideshow
+.container--slideshow {
+  width: 50vw;
+  height: 100vh;
+  position: relative;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  z-index: 5;
+}
+.slides {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.slide {
+  min-width: 100%;
+  position: relative;
+}
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slide-controls {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .next-btn,
+  .prev-btn {
+    cursor: pointer;
+    background: transparent;
+    height: 100%;
+    width: 50%;
+  }
+}
+
+// Gallery
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .gallery-img__container {
+    width: 30rem;
+    height: 100%;
+    position: relative;
+  }
+  .gallery-img {
+    width: 100%;
+    display: block;
+    opacity: 1;
+    object-fit: cover;
+  }
+  //fixes the last row formating
+  &::after {
+    content: "";
+    width: 30rem;
+  }
+}
+
+//initially hidden
+.gallery__edit-btn {
+  display: none;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  top: -10rem;
+  right: 1rem;
+  float: right;
+
+  &::before {
+    //edit icon
+    content: "";
+    height: 2rem;
+    width: 2rem;
+    display: inline-block;
+    background-image: url("../icons/png/edit1.png");
+    background-size: cover;
+  }
+  &:hover {
+    display: block;
+    background-color: transparentize($color: white, $amount: 0.3);
+    border-radius: 50%;
+  }
+}
+
+//displayed on img hover
+.gallery-img:hover ~ .gallery__edit-btn {
+  display: block;
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  top: -10rem;
+  right: 1rem;
+  float: right;
+  background-color: transparentize($color: white, $amount: 0.3);
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  animation: fadeIn 0.5s forwards;
+}
+
+// Closed overlay
+.gallery-img__overlay {
+  position: relative;
+  left: 0rem;
+  top: -5rem;
+  opacity: 0;
+  height: 5rem;
+  transform: translateY(4rem);
+  transition: transform 0.5s ease;
+}
+
+// Open overlay
+.edit__active {
+  //container
+  .gallery-img__overlay {
+    display: flex;
+    flex-direction: row;
+    background-color: transparentize($color: white, $amount: 0.3);
+    opacity: 1;
+    height: 5rem;
+    width: 30rem;
+    justify-content: flex-end;
+    transform: translateY(0);
+    // animation: fadeUp 0.5s ease-in-out;
+  }
+  //buttons
+  .overlay__close.form__close-btn {
+    margin-right: 2.5rem;
+    background-color: transparent;
+  }
+  .overlay__delete.flaticon-020-disable {
+    background-color: transparent;
+  }
+  .overlay__checkbox {
+    //unchecked
+    position: relative;
+    top: 1.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid black;
+    appearance: none;
+    outline: 0;
+    cursor: pointer;
+    //checked
+    &::before {
+      position: absolute;
+      top: -0.4rem;
+      color: black;
+      content: "";
+      display: block;
+      width: 1rem;
+      height: 2rem;
+      border-style: solid;
+      border-color: black;
+      border-width: 0 1px 1px 0;
+      transform: rotate(45deg);
+      opacity: 0;
+    }
+    &:checked {
+      border: black;
+      // show the checked btn
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+//edit-btn hidden when edit overlay is open
+.edit__active .gallery-img:hover ~ .gallery__edit-btn {
+  display: none;
+}
+
+.edit__active .edit__btn-visible {
+  opacity: 0;
+}
+
+.edit__btn-visible {
+  opacity: 1;
+}
+
+//Switching lists on click
+.gallery figure.home,
+.gallery figure.places {
+  display: block;
+}
+
+.gallery.home figure.home {
+  display: block;
+}
+
+.gallery.home figure.places {
+  display: none;
+}
+
+.gallery.places figure.places {
+  display: block;
+}
+
+.gallery.places figure.home {
+  display: none;
+}
+
+//img captions
+.caption__container {
+  line-height: 1.5;
+  display: flex;
+  position: relative;
+  top: -3rem;
+  .img__caption {
+    font-family: $cursive;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
+  .img__date {
+    font-weight: 300;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+//Footer
+.footer {
+  background: $grey;
+  height: 15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  line-height: 2;
+  font-family: $header-font;
+  &__copyright {
+    margin-left: 4rem;
+  }
+  &__social {
+    margin-right: 4rem;
+    display: flex;
+  }
+  &__social-link {
+    margin-left: 2rem;
+  }
+}
+
+//animations
+@keyframes fadeUp {
+  0% {
+    transform: translateY(4rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(1rem);
+  }
+  100% {
+    // opacity: 1;
+    transform: translateY(0);
+  }
+  0% {
+    opacity: 1;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
