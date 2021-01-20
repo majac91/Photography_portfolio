@@ -1,13 +1,58 @@
 import "./App.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import Parse from "parse";
+
 import Navbar from "./components/Navbar.js";
 import Carousel from "./components/Carousel.js";
 import Heading from "./components/Heading.js";
 import GalleryDisplayLinks from "./components/GalleryDisplayButtons.js";
 import Form from "./components/Form.js";
+import Gallery from "./components/Gallery";
 
 function App() {
   const [openForm, setOpenForm] = useState(false);
+  const [galleryItem, setGalleryItem] = useState({});
+  const [galleryList, setGalleryList] = useState([]);
+  const [isRendered, setIsRendered] = useState(false);
+
+  useLayoutEffect(() => {
+    Parse.initialize(
+      "vmgVvg3aF82Lhxcm97idm9UCLJGSHcvEzLmXxD22",
+      "0ZzBp7Szs8vOyijUakZHud8WaxnT1taYtVKSJ6Ha"
+    );
+    Parse.serverURL = "https://parseapi.back4app.com/";
+  }, []);
+
+  async function retreiveList() {
+    const Gallery = Parse.Object.extend("Gallery");
+    const query = new Parse.Query(Gallery);
+    query.equalTo("home", true);
+    const homeQuery = await query.find();
+
+    query.equalTo("home", false);
+    const placesQuery = await query.find();
+
+    const destList = [...homeQuery, ...placesQuery];
+
+    const retreivedList = [];
+
+    for (let i = 0; i < destList.length; i++) {
+      let object = destList[i];
+      let caption = object.get("caption");
+      let date = object.get("date");
+      let home = object.get("home");
+      let photo = object.get("photo").url();
+      let id = object.get("photoId");
+      let listItem = { caption, date, home, photo, id };
+      retreivedList.push(listItem);
+    }
+    setGalleryList(retreivedList);
+    setIsRendered(true);
+  }
+
+  useEffect(() => {
+    retreiveList();
+  }, []);
 
   return (
     <>
@@ -17,7 +62,13 @@ function App() {
         <Heading className="heading" />
       </header>
       <GalleryDisplayLinks setOpenForm={setOpenForm} openForm={openForm} />
-      <Form setOpenForm={setOpenForm} openForm={openForm}></Form>
+      <Form
+        galleryItem={galleryItem}
+        setGalleryItem={setGalleryItem}
+        setOpenForm={setOpenForm}
+        openForm={openForm}
+      />
+      <Gallery isRendered={isRendered} galleryList={galleryList}></Gallery>
     </>
   );
 }

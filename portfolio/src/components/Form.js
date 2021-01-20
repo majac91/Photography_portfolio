@@ -2,21 +2,18 @@ import React, { useState, useEffect, createRef, useLayoutEffect } from "react";
 import closebtn from "../icons/png/001-cancel-3.png";
 import Parse from "parse";
 
-export default function Form({ setOpenForm, openForm }) {
+export default function Form({
+  setGalleryItem,
+  galleryItem,
+  setOpenForm,
+  openForm,
+}) {
   const [caption, setCaption] = useState("caption");
   const [date, setDate] = useState("date");
   const [url, setUrl] = useState();
   const [location, setLocation] = useState();
-  const [galleryItem, seGalleryItem] = useState({});
+  //   const [galleryList, setGalleryList] = useState([]);
   const fileInput = React.createRef();
-
-  useLayoutEffect(() => {
-    Parse.initialize(
-      "vmgVvg3aF82Lhxcm97idm9UCLJGSHcvEzLmXxD22",
-      "0ZzBp7Szs8vOyijUakZHud8WaxnT1taYtVKSJ6Ha"
-    );
-    Parse.serverURL = "https://parseapi.back4app.com/";
-  }, []);
 
   const handleCaptionInput = (e) => setCaption(e.target.value);
   const handleDateInput = (e) => setDate(e.target.value);
@@ -24,10 +21,10 @@ export default function Form({ setOpenForm, openForm }) {
 
   const handleRadioBtns = (e) => {
     if (e.target.value === "Home") {
-      seGalleryItem({ ...galleryItem, home: true });
+      setGalleryItem({ ...galleryItem, home: true });
       setLocation(true);
     } else {
-      seGalleryItem({ ...galleryItem, home: false });
+      setGalleryItem({ ...galleryItem, home: false });
       setLocation(false);
     }
   };
@@ -39,7 +36,7 @@ export default function Form({ setOpenForm, openForm }) {
   };
 
   useEffect(() => {
-    seGalleryItem({
+    setGalleryItem({
       ...galleryItem,
       caption: caption,
       photoId: Math.round(Math.random() * 100000),
@@ -67,6 +64,32 @@ export default function Form({ setOpenForm, openForm }) {
       console.log(error);
     }
   }
+
+  //   async function retreiveList() {
+  //     const Gallery = Parse.Object.extend("Gallery");
+  //     const query = new Parse.Query(Gallery);
+  //     query.equalTo("home", true);
+  //     const homeQuery = await query.find();
+
+  //     query.equalTo("home", false);
+  //     const placesQuery = await query.find();
+
+  //     const destList = [...homeQuery, ...placesQuery];
+
+  //     const retreivedList = [];
+
+  //     for (let i = 0; i < destList.length; i++) {
+  //       let object = destList[i];
+  //       let caption = object.get("caption");
+  //       let date = object.get("date");
+  //       let home = object.get("home");
+  //       let photo = object.get("photo").url();
+  //       let id = object.get("photoId");
+  //       let listItem = { caption, date, home, photo, id };
+  //       retreivedList.push(listItem);
+  //     }
+  //     setGalleryList(retreivedList);
+  //   }
 
   return (
     <form
