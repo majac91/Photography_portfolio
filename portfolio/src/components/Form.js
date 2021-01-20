@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import closebtn from "../icons/png/001-cancel-3.png";
 import Parse from "parse";
 
@@ -12,7 +12,6 @@ export default function Form({
   const [date, setDate] = useState("date");
   const [url, setUrl] = useState();
   const [location, setLocation] = useState();
-  //   const [galleryList, setGalleryList] = useState([]);
   const fileInput = React.createRef();
 
   const handleCaptionInput = (e) => setCaption(e.target.value);
@@ -64,32 +63,6 @@ export default function Form({
       console.log(error);
     }
   }
-
-  //   async function retreiveList() {
-  //     const Gallery = Parse.Object.extend("Gallery");
-  //     const query = new Parse.Query(Gallery);
-  //     query.equalTo("home", true);
-  //     const homeQuery = await query.find();
-
-  //     query.equalTo("home", false);
-  //     const placesQuery = await query.find();
-
-  //     const destList = [...homeQuery, ...placesQuery];
-
-  //     const retreivedList = [];
-
-  //     for (let i = 0; i < destList.length; i++) {
-  //       let object = destList[i];
-  //       let caption = object.get("caption");
-  //       let date = object.get("date");
-  //       let home = object.get("home");
-  //       let photo = object.get("photo").url();
-  //       let id = object.get("photoId");
-  //       let listItem = { caption, date, home, photo, id };
-  //       retreivedList.push(listItem);
-  //     }
-  //     setGalleryList(retreivedList);
-  //   }
 
   return (
     <form

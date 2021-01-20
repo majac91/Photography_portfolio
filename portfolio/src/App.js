@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     retreiveList();
-  }, []);
+  }, []); //TODO - doesn't re-render when the list is updated
 
   return (
     <>
