@@ -1,4 +1,4 @@
-import React, { useState, createRef, useLayoutEffect } from "react";
+import React, { useState, useEffect, createRef, useLayoutEffect } from "react";
 import closebtn from "../icons/png/001-cancel-3.png";
 import Parse from "parse";
 
@@ -18,22 +18,18 @@ export default function Form({ setOpenForm, openForm }) {
     Parse.serverURL = "https://parseapi.back4app.com/";
   }, []);
 
-  const handleCaptionInput = (e) => {
-    setCaption(e.target.value);
-    seGalleryItem({
-      ...galleryItem,
-      caption: caption,
-      photoId: Math.round(Math.random() * 100000),
-    });
-  };
-  const handleDateInput = (e) => {
-    setDate(e.target.value);
-    seGalleryItem({ ...galleryItem, date: date });
-  };
+  const handleCaptionInput = (e) => setCaption(e.target.value);
+  const handleDateInput = (e) => setDate(e.target.value);
+  const handleFileInput = (e) => setUrl(fileInput.current.files[0].name);
 
-  const handleFileInput = (e) => {
-    setUrl(fileInput.current.files[0].name);
-    seGalleryItem({ ...galleryItem, url: url });
+  const handleRadioBtns = (e) => {
+    if (e.target.value === "Home") {
+      seGalleryItem({ ...galleryItem, home: true });
+      setLocation(true);
+    } else {
+      seGalleryItem({ ...galleryItem, home: false });
+      setLocation(false);
+    }
   };
 
   const handleFormSubmit = (e) => {
@@ -41,6 +37,16 @@ export default function Form({ setOpenForm, openForm }) {
     console.log(galleryItem);
     addPhoto();
   };
+
+  useEffect(() => {
+    seGalleryItem({
+      ...galleryItem,
+      caption: caption,
+      photoId: Math.round(Math.random() * 100000),
+      url: url,
+      date: date,
+    });
+  }, [caption, url, date]);
 
   async function addPhoto() {
     const Gallery = Parse.Object.extend("Gallery");
@@ -61,16 +67,6 @@ export default function Form({ setOpenForm, openForm }) {
       console.log(error);
     }
   }
-
-  const handleRadioBtns = (e) => {
-    if (e.target.value === "Home") {
-      seGalleryItem({ ...galleryItem, home: true });
-      setLocation(true);
-    } else {
-      seGalleryItem({ ...galleryItem, home: false });
-      setLocation(false);
-    }
-  };
 
   return (
     <form
