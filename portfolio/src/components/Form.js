@@ -1,52 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, createRef } from "react";
 import closebtn from "../icons/png/001-cancel-3.png";
 import Parse from "parse";
 
-export default function Form({
-  setGalleryItem,
-  galleryItem,
-  setOpenForm,
-  openForm,
-}) {
+export default function Form({ isFormOpen, onCloseForm, onSubmitForm }) {
   const [caption, setCaption] = useState("caption");
   const [date, setDate] = useState("date");
   const [url, setUrl] = useState();
   const [location, setLocation] = useState();
-  const fileInput = React.createRef();
+  const fileInput = createRef();
 
+  const handleFileInput = (e) => setUrl(fileInput.current.files[0].name); //TODO fix photo path
   const handleCaptionInput = (e) => setCaption(e.target.value);
   const handleDateInput = (e) => setDate(e.target.value);
-  const handleFileInput = (e) => setUrl(fileInput.current.files[0].name);
 
   const handleRadioBtns = (e) => {
     if (e.target.value === "Home") {
-      setGalleryItem({ ...galleryItem, home: true });
       setLocation(true);
     } else {
-      setGalleryItem({ ...galleryItem, home: false });
       setLocation(false);
     }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(galleryItem);
     addPhoto();
   };
-
-  useEffect(() => {
-    setGalleryItem({
-      ...galleryItem,
-      caption: caption,
-      photoId: Math.round(Math.random() * 100000),
-      url: url,
-      date: date,
-    });
-  }, [caption, url, date]);
 
   async function addPhoto() {
     const Gallery = Parse.Object.extend("Gallery");
     const gallery = new Gallery();
+    // const fileInput = document.getElementById("inputImg");
+    // const selectedFiles = [...fileInput.files];
+    // const file = selectedFiles[0];
+    // const parseFile = new Parse.File("photo.jpg", fileInput);
     const base64 = window.btoa(url);
     const parseFile = new Parse.File("photo.jpg", { base64: base64 });
 
@@ -56,9 +42,10 @@ export default function Form({
         date: date,
         home: location,
         photo: parseFile,
-        photoId: galleryItem.photoId,
+        photoId: Math.round(Math.random() * 100000),
       });
       console.log("The object was added successfully.");
+      onSubmitForm();
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +55,7 @@ export default function Form({
     <form
       id="add-photo-form"
       className={`form ${
-        openForm ? "add-photo-form--open" : "add-photo-form--closed"
+        isFormOpen ? "add-photo-form--open" : "add-photo-form--closed"
       }`}
       onSubmit={handleFormSubmit}
     >
@@ -100,9 +87,9 @@ export default function Form({
         Photo
       </label>
       <input
+        onChange={handleFileInput}
         type="file"
         id="inputImg"
-        onChange={handleFileInput}
         ref={fileInput}
         required
         className="form__input form__input-img"
@@ -121,7 +108,7 @@ export default function Form({
         Upload
       </button>
       <button
-        onClick={() => setOpenForm(!openForm)}
+        onClick={onCloseForm}
         type="button"
         id="close"
         className="form__close-btn"

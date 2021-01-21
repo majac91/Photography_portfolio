@@ -1,7 +1,7 @@
 import React from "react";
 import addbtn from "../icons/png/016-add.png";
 
-export default function GalleryDisplayLinks({ setOpenForm, openForm }) {
+export default function GalleryDisplayButtons({ onOpenForm }) {
   return (
     <div id="main-btns" className="main-btns">
       <button className="btn btn__all" type="button">
@@ -13,13 +13,7 @@ export default function GalleryDisplayLinks({ setOpenForm, openForm }) {
       <button className="btn btn__places" type="button">
         Places
       </button>
-      <button
-        onClick={() => {
-          setOpenForm(!openForm);
-        }}
-        className="btn btn__add"
-        type="button"
-      >
+      <button onClick={onOpenForm} className="btn btn__add" type="button">
         <img alt="add-button" src={addbtn}></img>
       </button>
     </div>

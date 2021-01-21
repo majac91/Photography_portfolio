@@ -1,7 +1,7 @@
 import React from "react";
 import scrollbtn from "../icons/png/next.png";
 
-export default function Heading(props) {
+export default function Heading() {
   return (
     <section className="heading">
       <h1 className="heading--visually-hidden">

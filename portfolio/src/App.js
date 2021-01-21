@@ -5,15 +5,14 @@ import Parse from "parse";
 import Navbar from "./components/Navbar.js";
 import Carousel from "./components/Carousel.js";
 import Heading from "./components/Heading.js";
-import GalleryDisplayLinks from "./components/GalleryDisplayButtons.js";
+import GalleryDisplayButtons from "./components/GalleryDisplayButtons.js";
 import Form from "./components/Form.js";
 import Gallery from "./components/Gallery";
 
 function App() {
-  const [openForm, setOpenForm] = useState(false);
-  const [galleryItem, setGalleryItem] = useState({});
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [galleryList, setGalleryList] = useState([]);
-  const [isRendered, setIsRendered] = useState(false);
+  const [itemAdded, setItemAdded] = useState(false);
 
   useLayoutEffect(() => {
     Parse.initialize(
@@ -47,28 +46,41 @@ function App() {
       retreivedList.push(listItem);
     }
     setGalleryList(retreivedList);
-    setIsRendered(true);
   }
 
+  //load list on page load
   useEffect(() => {
     retreiveList();
-  }, []); //TODO - doesn't re-render when the list is updated
+  }, []);
+
+  function handleFormOpen() {
+    setIsFormOpen((currentOpenState) => !currentOpenState);
+  }
+
+  function handleFormSubmit() {
+    retreiveList();
+    handleFormOpen();
+  }
 
   return (
     <>
-      <Navbar className="navbar"></Navbar>
+      <Navbar />
       <header className="header">
-        <Carousel className="container--slideshow" />
-        <Heading className="heading" />
+        <Carousel />
+        <Heading />
       </header>
-      <GalleryDisplayLinks setOpenForm={setOpenForm} openForm={openForm} />
-      <Form
-        galleryItem={galleryItem}
-        setGalleryItem={setGalleryItem}
-        setOpenForm={setOpenForm}
-        openForm={openForm}
+      <GalleryDisplayButtons
+        onOpenForm={handleFormOpen}
+        isFormOpen={isFormOpen}
       />
-      <Gallery isRendered={isRendered} galleryList={galleryList}></Gallery>
+      <Form
+        onSubmitForm={handleFormSubmit}
+        onCloseForm={handleFormOpen}
+        isFormOpen={isFormOpen}
+        itemAdded={itemAdded}
+        setItemAdded={setItemAdded}
+      />
+      <Gallery galleryList={galleryList}></Gallery>
     </>
   );
 }
