@@ -12,6 +12,7 @@ import Gallery from "./components/Gallery";
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [galleryList, setGalleryList] = useState([]);
+  const [viewCategory, setViewCategory] = useState("all");
   const [itemAdded, setItemAdded] = useState(false);
 
   useLayoutEffect(() => {
@@ -62,6 +63,10 @@ function App() {
     handleFormOpen();
   }
 
+  function handlDisplayCategory(e) {
+    setViewCategory(e.target.dataset.param);
+  }
+
   return (
     <>
       <Navbar />
@@ -70,6 +75,7 @@ function App() {
         <Heading />
       </header>
       <GalleryDisplayButtons
+        onBtnClick={handlDisplayCategory}
         onOpenForm={handleFormOpen}
         isFormOpen={isFormOpen}
       />
@@ -80,7 +86,9 @@ function App() {
         itemAdded={itemAdded}
         setItemAdded={setItemAdded}
       />
-      <Gallery galleryList={galleryList}></Gallery>
+      <main className={`gallery container ${viewCategory}`} id="gallery">
+        <Gallery galleryList={galleryList} />
+      </main>
     </>
   );
 }

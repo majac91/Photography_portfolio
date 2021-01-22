@@ -9,7 +9,7 @@ export default function Form({ isFormOpen, onCloseForm, onSubmitForm }) {
   const [location, setLocation] = useState();
   const fileInput = createRef();
 
-  const handleFileInput = (e) => setUrl(fileInput.current.files[0].name); //TODO fix photo path
+  const handleFileInput = (e) => setUrl(fileInput.current); //TODO fix photo path
   const handleCaptionInput = (e) => setCaption(e.target.value);
   const handleDateInput = (e) => setDate(e.target.value);
 
@@ -29,12 +29,13 @@ export default function Form({ isFormOpen, onCloseForm, onSubmitForm }) {
   async function addPhoto() {
     const Gallery = Parse.Object.extend("Gallery");
     const gallery = new Gallery();
-    // const fileInput = document.getElementById("inputImg");
-    // const selectedFiles = [...fileInput.files];
-    // const file = selectedFiles[0];
-    // const parseFile = new Parse.File("photo.jpg", fileInput);
-    const base64 = window.btoa(url);
-    const parseFile = new Parse.File("photo.jpg", { base64: base64 });
+    const fileInput = document.getElementById("inputImg");
+    const selectedFiles = [...fileInput.files];
+    const file = selectedFiles[0];
+    const parseFile = new Parse.File("photo.jpg", file);
+
+    // const base64 = window.btoa(url);
+    // const parseFile = new Parse.File("photo.jpg", { base64: base64 });
 
     try {
       await gallery.save({
@@ -87,7 +88,7 @@ export default function Form({ isFormOpen, onCloseForm, onSubmitForm }) {
         Photo
       </label>
       <input
-        onChange={handleFileInput}
+        // onChange={handleFileInput}
         type="file"
         id="inputImg"
         ref={fileInput}
