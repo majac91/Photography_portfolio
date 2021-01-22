@@ -4,10 +4,10 @@ import deletebtn from "../icons/png/delete.png";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default function Gallery({ galleryList }) {
-  const [isEditActive, setIsEditActive] = useState(false);
+  const [activeItemId, setActiveItemId] = useState();
 
-  function handleOverlayActive() {
-    setIsEditActive((prevIsActive) => !prevIsActive);
+  function handleActiveItem(id) {
+    setActiveItemId(id);
   }
 
   return (
@@ -16,10 +16,10 @@ export default function Gallery({ galleryList }) {
         {galleryList.map((el) => {
           return (
             <figure
-              key={el.id} //TODO - key doesn't work
+              key={el.id}
               className={`gallery-img__container ${
                 el.home ? "home" : "places"
-              } ${isEditActive ? "edit__active" : ""}`}
+              } ${el.id === activeItemId ? "edit__active" : ""}`}
             >
               <img src={el.photo} alt={el.caption} className="gallery-img" />
               <div className="gallery-img__overlay">
@@ -48,7 +48,7 @@ export default function Gallery({ galleryList }) {
                 </button>
               </div>
               <button
-                onClick={handleOverlayActive}
+                onClick={() => handleActiveItem(el.id)}
                 type="button"
                 className="gallery__edit-btn"
               ></button>
