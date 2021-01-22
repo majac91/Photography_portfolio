@@ -253,13 +253,16 @@ button {
 
 // Gallery
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+
   .gallery-img__container {
-    width: 30rem;
+    width: 35rem;
     height: 100%;
-    position: relative;
+    margin: auto;
+
+    // position: relative;
   }
   .gallery-img {
     width: 100%;
@@ -267,11 +270,11 @@ button {
     opacity: 1;
     object-fit: cover;
   }
-  //fixes the last row formating
-  &::after {
-    content: "";
-    width: 30rem;
-  }
+  //   //fixes the last row formating
+  //   &::after {
+  //     content: "";
+  //     width: 30rem;
+  //   }
 }
 
 //initially hidden
@@ -336,25 +339,29 @@ button {
     background-color: transparentize($color: white, $amount: 0.3);
     opacity: 1;
     height: 5rem;
-    width: 30rem;
+    width: 35rem;
     justify-content: flex-end;
     transform: translateY(0);
-    // animation: fadeUp 0.5s ease-in-out;
   }
-  //buttons
-  .overlay__close.form__close-btn {
-    margin-right: 2.5rem;
+
+  .overlay__close,
+  .overlay__delete,
+  .overlay__checkbox {
     background-color: transparent;
   }
-  .overlay__delete.flaticon-020-disable {
-    background-color: transparent;
+
+  .overlay__btn {
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0 1.5rem;
   }
+
   .overlay__checkbox {
     //unchecked
     position: relative;
     top: 1.5rem;
-    width: 1.8rem;
-    height: 1.8rem;
+    // width: 1.8rem;
+    // height: 1.8rem;
     border: 1px solid black;
     appearance: none;
     outline: 0;

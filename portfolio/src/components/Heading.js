@@ -10,7 +10,7 @@ export default function Heading() {
       <p className="heading__subtitle">Hey, welcome and take a look</p>
       <p className="heading__title">
         This is a photographic journal of
-        <span className="heading__name">Maja Cvetkovic</span>, an amateur
+        <span className="heading__name"> Maja Cvetkovic</span>, an amateur
         photographer based in Nis, Serbia.
       </p>
       <label className="heading__scroll-label">Scroll down</label>
