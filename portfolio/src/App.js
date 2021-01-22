@@ -1,6 +1,8 @@
 import "./App.scss";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import Parse from "parse";
+import { mscConfirm } from "medium-style-confirm";
+import "medium-style-confirm/css/msc-style.css";
 
 import Navbar from "./components/Navbar.js";
 import Carousel from "./components/Carousel.js";
@@ -67,6 +69,25 @@ function App() {
     setViewCategory(e.target.dataset.param);
   }
 
+  async function handleDeletePhoto(id) {
+    const Gallery = Parse.Object.extend("Gallery");
+    const query = new Parse.Query(Gallery);
+    query.equalTo("photoId", id);
+    const deleteQuery = await query.find();
+
+    if (
+      mscConfirm("Delete photo?", async function () {
+        try {
+          const object = await deleteQuery[0].destroy();
+          console.log("The object was deleted successfully.");
+        } catch (e) {
+          console.log("Delete failed!", e);
+        }
+        retreiveList();
+      })
+    );
+  }
+
   return (
     <>
       <Navbar />
@@ -87,7 +108,7 @@ function App() {
         setItemAdded={setItemAdded}
       />
       <main className={`gallery container ${viewCategory}`} id="gallery">
-        <Gallery galleryList={galleryList} />
+        <Gallery galleryList={galleryList} onDeletePhoto={handleDeletePhoto} />
       </main>
     </>
   );

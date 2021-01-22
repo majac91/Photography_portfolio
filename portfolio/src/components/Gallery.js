@@ -3,11 +3,15 @@ import closebtn from "../icons/png/001-cancel-3.png";
 import deletebtn from "../icons/png/delete.png";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
-export default function Gallery({ galleryList }) {
+export default function Gallery({ galleryList, onDeletePhoto }) {
   const [activeItemId, setActiveItemId] = useState();
 
   function handleActiveItem(id) {
     setActiveItemId(id);
+  }
+
+  function closeActiveItem() {
+    setActiveItemId("");
   }
 
   return (
@@ -28,7 +32,10 @@ export default function Gallery({ galleryList }) {
                   className="overlay__checkbox overlay__btn"
                   checked="checked"
                 />
-                <button className="overlay__delete">
+                <button
+                  onClick={() => onDeletePhoto(el.id)}
+                  className="overlay__delete"
+                >
                   <img
                     alt="close edit"
                     className="overlay__btn"
@@ -36,8 +43,8 @@ export default function Gallery({ galleryList }) {
                   ></img>
                 </button>
                 <button
-                  // disabled={isEditActive ? false : true}
                   type="button"
+                  onClick={closeActiveItem}
                   className="overlay__close"
                 >
                   <img
