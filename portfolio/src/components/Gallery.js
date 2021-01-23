@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import closebtn from "../icons/png/001-cancel-3.png";
 import deletebtn from "../icons/png/delete.png";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import facebookbtn from "../icons/png/facebook.png";
+import twitterbtn from "../icons/png/twitter.png";
+import pinterestbtn from "../icons/png/pinterest.png";
+import tumblrbtn from "../icons/png/tumblr.png";
 
-export default function Gallery({ galleryList, onDeletePhoto }) {
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  PinterestShareButton,
+  TumblrShareButton,
+} from "react-share";
+
+export default function Gallery({ galleryList, onDeleteItem }) {
   const [activeItemId, setActiveItemId] = useState();
 
   function handleActiveItem(id) {
@@ -33,14 +44,14 @@ export default function Gallery({ galleryList, onDeletePhoto }) {
                   checked="checked"
                 />
                 <button
-                  onClick={() => onDeletePhoto(el.id)}
+                  onClick={() => onDeleteItem(el.id)}
                   className="overlay__delete"
                 >
                   <img
                     alt="close edit"
                     className="overlay__btn"
                     src={deletebtn}
-                  ></img>
+                  />
                 </button>
                 <button
                   type="button"
@@ -51,8 +62,36 @@ export default function Gallery({ galleryList, onDeletePhoto }) {
                     alt="close edit"
                     className="overlay__btn"
                     src={closebtn}
-                  ></img>
+                  />
                 </button>
+                <FacebookShareButton url={el.photo}>
+                  <img
+                    className="overlay__btn"
+                    alt="share to facebook"
+                    src={facebookbtn}
+                  />
+                </FacebookShareButton>
+                <TwitterShareButton url={el.photo}>
+                  <img
+                    alt="share to facebook"
+                    className="overlay__btn"
+                    src={twitterbtn}
+                  />
+                </TwitterShareButton>
+                <PinterestShareButton url={el.photo} media={el.photo}>
+                  <img
+                    alt="share to pinterest"
+                    className="overlay__btn"
+                    src={pinterestbtn}
+                  />
+                </PinterestShareButton>
+                <TumblrShareButton url={el.photo}>
+                  <img
+                    alt="share to tumblr"
+                    className="overlay__btn"
+                    src={tumblrbtn}
+                  />
+                </TumblrShareButton>
               </div>
               <button
                 onClick={() => handleActiveItem(el.id)}

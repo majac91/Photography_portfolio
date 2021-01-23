@@ -69,7 +69,7 @@ function App() {
     setViewCategory(e.target.dataset.param);
   }
 
-  async function handleDeletePhoto(id) {
+  async function handleDeleteItem(id) {
     const Gallery = Parse.Object.extend("Gallery");
     const query = new Parse.Query(Gallery);
     query.equalTo("photoId", id);
@@ -108,7 +108,7 @@ function App() {
         setItemAdded={setItemAdded}
       />
       <main className={`gallery container ${viewCategory}`} id="gallery">
-        <Gallery galleryList={galleryList} onDeletePhoto={handleDeletePhoto} />
+        <Gallery galleryList={galleryList} onDeleteItem={handleDeleteItem} />
       </main>
     </>
   );
