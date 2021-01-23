@@ -66,7 +66,7 @@ export default function Gallery({ galleryList, onDeleteItem }) {
                 </button>
                 <FacebookShareButton url={el.photo}>
                   <img
-                    className="overlay__btn"
+                    className="overlay__btn" //TODO - fix urls
                     alt="share to facebook"
                     src={facebookbtn}
                   />
