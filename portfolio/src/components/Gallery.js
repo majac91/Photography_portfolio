@@ -13,6 +13,7 @@ import facebookbtn from "../icons/png/facebook.png";
 import twitterbtn from "../icons/png/twitter.png";
 import pinterestbtn from "../icons/png/pinterest.png";
 import tumblrbtn from "../icons/png/tumblr.png";
+import editbtn from "../icons/png/edit1.png";
 
 export default function Gallery({ galleryList, onDeleteItem }) {
   const [activeItemId, setActiveItemId] = useState();
@@ -44,27 +45,7 @@ export default function Gallery({ galleryList, onDeleteItem }) {
                   className="overlay__checkbox overlay__btn"
                   checked="checked"
                 /> */}
-                <button
-                  onClick={() => onDeleteItem(el.id)}
-                  className="overlay__delete"
-                >
-                  <img
-                    alt="close edit"
-                    className="overlay__btn"
-                    src={deletebtn}
-                  />
-                </button>
-                <button
-                  type="button"
-                  onClick={closeActiveItem}
-                  className="overlay__close"
-                >
-                  <img
-                    alt="close edit"
-                    className="overlay__btn"
-                    src={closebtn}
-                  />
-                </button>
+
                 <FacebookShareButton url={el.photo}>
                   <img
                     className="overlay__btn" //TODO - fix urls
@@ -93,12 +74,40 @@ export default function Gallery({ galleryList, onDeleteItem }) {
                     src={tumblrbtn}
                   />
                 </TumblrShareButton>
+
+                <button
+                  onClick={() => onDeleteItem(el.id)}
+                  className="overlay__delete"
+                >
+                  <img
+                    alt="close edit"
+                    className="overlay__btn"
+                    src={deletebtn}
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={closeActiveItem}
+                  className="overlay__close"
+                >
+                  <img
+                    alt="close edit"
+                    className="overlay__btn"
+                    src={closebtn}
+                  />
+                </button>
               </div>
               <button
                 onClick={() => handleActiveItem(el.id)}
                 type="button"
-                className="gallery__edit-btn"
-              ></button>
+                className="gallery__edit-btn overlay__btn"
+              >
+                <img
+                  alt="edit"
+                  className="gallery__edit-btn-img overlay__btn"
+                  src={editbtn}
+                />
+              </button>
               <figcaption className="caption__container">
                 <div className="caption__text">
                   <h2 className="img__caption">{el.caption}</h2>

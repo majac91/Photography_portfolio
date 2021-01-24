@@ -253,16 +253,10 @@ button {
 
 // Gallery
 .gallery {
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: space-between;
-
   .gallery-img__container {
     width: 35rem;
     height: 100%;
     margin: auto;
-
-    // position: relative;
   }
   .gallery-img {
     width: 100%;
@@ -270,11 +264,6 @@ button {
     opacity: 1;
     object-fit: cover;
   }
-  //   //fixes the last row formating
-  //   &::after {
-  //     content: "";
-  //     width: 30rem;
-  //   }
 }
 
 //initially hidden
@@ -283,18 +272,12 @@ button {
   position: relative;
   height: 4rem;
   width: 4rem;
-  top: -10rem;
+  top: -10.5rem;
   right: 1rem;
   float: right;
-
-  &::before {
-    //edit icon
-    content: "";
-    height: 2rem;
-    width: 2rem;
-    display: inline-block;
-    background-image: url("../icons/png/edit1.png");
-    background-size: cover;
+  &-img {
+    height: 1.8rem;
+    width: 1.8rem;
   }
   &:hover {
     display: block;
@@ -306,12 +289,6 @@ button {
 //displayed on img hover
 .gallery-img:hover ~ .gallery__edit-btn {
   display: block;
-  position: relative;
-  height: 4rem;
-  width: 4rem;
-  top: -10rem;
-  right: 1rem;
-  float: right;
   background-color: transparentize($color: white, $amount: 0.3);
   border-radius: 50%;
   outline: none;
@@ -328,6 +305,11 @@ button {
   height: 5rem;
   transform: translateY(4rem);
   transition: transform 0.5s ease;
+}
+
+.overlay__close .overlay__btn {
+  width: 0;
+  height: 0;
 }
 
 // Open overlay
@@ -390,9 +372,12 @@ button {
     }
   }
 }
+.gallery-img:hover ~ .gallery__edit-btn ~ img {
+  display: block;
+}
 
-//edit-btn hidden when edit overlay is open
-.edit__active .gallery-img:hover ~ .gallery__edit-btn {
+.edit__active .gallery__edit-btn,
+.edit__active:hover .gallery__edit-btn {
   display: none;
 }
 

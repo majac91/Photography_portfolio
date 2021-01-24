@@ -51,7 +51,7 @@ export default function Carousel(props) {
   useEffect(() => {
     const container = slideContainer.current;
     // handleTransition(container);
-    moveToNextSlide(container);
+    // moveToNextSlide(container);
     // const slideInterval = setInterval(() => {
     //     moveToNextSlide(container);
     // }, interval);
