@@ -6,7 +6,7 @@ import fourthSlide from "../images/photo25.jpg";
 
 export default function Carousel(props) {
   const [slideIndex, setSlideIndex] = useState(0);
-  const firstClone = { url: firstSlide }; //get the photo without refferencing the firstSlide so the class first-clone is added only to the clone
+  const firstClone = { url: firstSlide }; //get the photo without refferencing the firstSlide so the class first-slide is added only to the clone
   const lastClone = { url: fourthSlide };
 
   const slides = [
@@ -51,7 +51,7 @@ export default function Carousel(props) {
   useEffect(() => {
     const container = slideContainer.current;
     // handleTransition(container);
-    // moveToNextSlide(container);
+    moveToNextSlide(container);
     // const slideInterval = setInterval(() => {
     //     moveToNextSlide(container);
     // }, interval);
