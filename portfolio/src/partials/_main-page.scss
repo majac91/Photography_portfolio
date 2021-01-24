@@ -58,6 +58,9 @@ button {
       //'Hey'
       font-style: italic;
     }
+    &:last-child {
+      margin-right: 6rem;
+    }
   }
   &--shrink {
     font-size: 1.2rem;

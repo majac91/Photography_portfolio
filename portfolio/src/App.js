@@ -10,6 +10,7 @@ import Heading from "./components/Heading.js";
 import GalleryDisplayButtons from "./components/GalleryDisplayButtons.js";
 import Form from "./components/Form.js";
 import Gallery from "./components/Gallery";
+import Footer from "./components/Footer";
 
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -110,6 +111,7 @@ function App() {
       <main className={`gallery container ${viewCategory}`} id="gallery">
         <Gallery galleryList={galleryList} onDeleteItem={handleDeleteItem} />
       </main>
+      <Footer />
     </>
   );
 }

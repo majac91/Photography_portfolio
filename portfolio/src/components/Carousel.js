@@ -43,7 +43,7 @@ export default function Carousel(props) {
     if (slideIndex >= slides.length - 1) return;
     setSlideIndex((prevIndex) => prevIndex + 1);
     container.style.transition = ".7s ease-out";
-    container.style.transform = `translateX(${-slideWidth * slideIndex}px)`; //the index increases so the amount amount a slide is transitioned increases
+    container.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
   }
 
   function moveToPreviousSlide() {}
@@ -69,7 +69,7 @@ export default function Carousel(props) {
           {slides.map((slide) => {
             return (
               <div
-                key={`${Math.random() * 1000}`}
+                key={`${Math.random() * 1000}`} //TODO
                 className={`slide slide-${slides.indexOf(slide)} 
                 ${slides.indexOf(slide) === 0 ? "last-clone" : ""}
                 ${
