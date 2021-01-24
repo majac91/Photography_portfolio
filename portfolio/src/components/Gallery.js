@@ -1,11 +1,4 @@
 import React, { useState } from "react";
-import closebtn from "../icons/png/001-cancel-3.png";
-import deletebtn from "../icons/png/delete.png";
-import facebookbtn from "../icons/png/facebook.png";
-import twitterbtn from "../icons/png/twitter.png";
-import pinterestbtn from "../icons/png/pinterest.png";
-import tumblrbtn from "../icons/png/tumblr.png";
-
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import {
   FacebookShareButton,
@@ -13,6 +6,13 @@ import {
   PinterestShareButton,
   TumblrShareButton,
 } from "react-share";
+
+import closebtn from "../icons/png/001-cancel-3.png";
+import deletebtn from "../icons/png/delete.png";
+import facebookbtn from "../icons/png/facebook.png";
+import twitterbtn from "../icons/png/twitter.png";
+import pinterestbtn from "../icons/png/pinterest.png";
+import tumblrbtn from "../icons/png/tumblr.png";
 
 export default function Gallery({ galleryList, onDeleteItem }) {
   const [activeItemId, setActiveItemId] = useState();
@@ -36,13 +36,14 @@ export default function Gallery({ galleryList, onDeleteItem }) {
                 el.home ? "home" : "places"
               } ${el.id === activeItemId ? "edit__active" : ""}`}
             >
+              {/* TODO- separate and render edit/social buttons based on roles */}
               <img src={el.photo} alt={el.caption} className="gallery-img" />
               <div className="gallery-img__overlay">
-                <input
-                  type="checkbox"
+                {/* <input
+                  type="checkbox" //TODO - change icon
                   className="overlay__checkbox overlay__btn"
                   checked="checked"
-                />
+                /> */}
                 <button
                   onClick={() => onDeleteItem(el.id)}
                   className="overlay__delete"
