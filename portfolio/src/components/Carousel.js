@@ -6,7 +6,9 @@ import fourthSlide from "../images/photo25.jpg";
 
 export default function Carousel(props) {
   const [slideIndex, setSlideIndex] = useState(0);
-  const firstClone = { url: firstSlide }; //get the photo without refferencing the firstSlide so the class first-slide is added only to the clone
+  const [slideWidth, setSlideWidth] = useState(0);
+
+  const firstClone = { url: firstSlide };
   const lastClone = { url: fourthSlide };
 
   const slides = [
@@ -21,55 +23,66 @@ export default function Carousel(props) {
   const slideContainer = createRef();
   const interval = 3000;
 
-  function handleTransition(container) {
-    const slideWidth = container.clientWidth || window.onresize;
+  function handleTransition() {
     if (slides[slideIndex] === firstClone) {
-      container.style.transition = "none";
       setSlideIndex(1);
-      container.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
     }
 
     if (slides[slideIndex] === lastClone) {
-      container.style.transition = "none";
       setSlideIndex(slides.length - 2);
-      container.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
     }
   }
 
-  function moveToNextSlide(container) {
-    console.log(container);
-    const slideWidth = container.clientWidth || window.onresize;
-
+  function moveToNextSlide() {
     if (slideIndex >= slides.length - 1) return;
+    setSlideWidth(slideContainer.current.clientWidth);
     setSlideIndex((prevIndex) => prevIndex + 1);
-    container.style.transition = ".7s ease-out";
-    container.style.transform = `translateX(${-slideWidth * slideIndex}px)`;
   }
 
-  function moveToPreviousSlide() {}
+  function moveToPreviousSlide() {
+    if (slideIndex <= 0) return;
+    setSlideWidth(slideContainer.current.clientWidth);
+    setSlideIndex((prevIndex) => prevIndex - 1);
+  }
 
-  useEffect(() => {
-    const container = slideContainer.current;
-    // handleTransition(container);
-    moveToNextSlide(container);
-    // const slideInterval = setInterval(() => {
-    //     moveToNextSlide(container);
-    // }, interval);
-    // return () => clearInterval(slideInterval);
-  }, []);
+  // render index 1 slide on load
+  // useEffect(() => {
+  //   moveToNextSlide();
+  // }, []);
+
+  //autoplay
+  // useEffect(() => {
+  //   const id = setInterval(() => {
+  //     moveToNextSlide();
+  //   }, interval);
+  //   return () => {
+  //     clearInterval(id);
+  //   };
+  // }, [slideIndex]);
 
   return (
     <>
       <section className="container--slideshow">
         <div
-          onTransitionEnd={() => handleTransition(slideContainer)}
+          onTransitionEnd={handleTransition}
           ref={slideContainer}
           className="slides"
+          style={
+            slideIndex === 1 || slideIndex === slides.length - 2
+              ? {
+                  transition: "none",
+                  transform: `translateX(-${slideWidth * slideIndex}px)`,
+                }
+              : {
+                  transition: ".7s ease-out",
+                  transform: `translateX(-${slideWidth * slideIndex}px)`,
+                }
+          }
         >
-          {slides.map((slide) => {
+          {slides.map((slide, index) => {
             return (
               <div
-                key={`${Math.random() * 1000}`} //TODO
+                key={index}
                 className={`slide slide-${slides.indexOf(slide)} 
                 ${slides.indexOf(slide) === 0 ? "last-clone" : ""}
                 ${
@@ -78,7 +91,10 @@ export default function Carousel(props) {
                     : ""
                 }`}
               >
-                <img src={typeof slide === String ? slide : slide.url} alt="" />
+                <img
+                  src={typeof slide === "string" ? slide : slide.url}
+                  alt=""
+                />
               </div>
             );
           })}
