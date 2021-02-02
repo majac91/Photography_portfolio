@@ -1,4 +1,11 @@
-import React, { useEffect, useState, createRef } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  createRef,
+  useCallback,
+  useMemo,
+} from "react";
 import firstSlide from "../images/photo0.jpg";
 import secondSlide from "../images/photo1.jpg";
 import thirdSlide from "../images/photo8.jpg";
@@ -7,18 +14,22 @@ import fourthSlide from "../images/photo25.jpg";
 export default function Carousel(props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [slideWidth, setSlideWidth] = useState(0);
+  const skipTransition = useRef(false);
 
-  const firstClone = { url: firstSlide };
-  const lastClone = { url: fourthSlide };
+  const firstClone = useMemo(() => ({ url: firstSlide }), []);
+  const lastClone = useMemo(() => ({ url: fourthSlide }), []);
 
-  const slides = [
-    lastClone,
-    firstSlide,
-    secondSlide,
-    thirdSlide,
-    fourthSlide,
-    firstClone,
-  ];
+  const slides = useMemo(
+    () => [
+      lastClone,
+      firstSlide,
+      secondSlide,
+      thirdSlide,
+      fourthSlide,
+      firstClone,
+    ],
+    [firstClone, lastClone]
+  );
 
   const slideContainer = createRef();
   const interval = 3000;
@@ -26,18 +37,19 @@ export default function Carousel(props) {
   function handleTransition() {
     if (slides[slideIndex] === firstClone) {
       setSlideIndex(1);
+      skipTransition.current = true;
     }
-
     if (slides[slideIndex] === lastClone) {
       setSlideIndex(slides.length - 2);
+      skipTransition.current = true;
     }
   }
 
-  function moveToNextSlide() {
+  const moveToNextSlide = useCallback(() => {
     if (slideIndex >= slides.length - 1) return;
     setSlideWidth(slideContainer.current.clientWidth);
     setSlideIndex((prevIndex) => prevIndex + 1);
-  }
+  }, [slideContainer, slideIndex, slides.length]);
 
   function moveToPreviousSlide() {
     if (slideIndex <= 0) return;
@@ -45,20 +57,25 @@ export default function Carousel(props) {
     setSlideIndex((prevIndex) => prevIndex - 1);
   }
 
-  // render index 1 slide on load
-  // useEffect(() => {
-  //   moveToNextSlide();
-  // }, []);
+  //continue transitioning
+  useEffect(() => {
+    if (slideIndex === 1) {
+      skipTransition.current = false;
+    }
+    if (slideIndex === slides.length - 2) {
+      skipTransition.current = false;
+    }
+  }, [slideIndex, slides, firstClone]);
 
-  //autoplay
-  // useEffect(() => {
-  //   const id = setInterval(() => {
-  //     moveToNextSlide();
-  //   }, interval);
-  //   return () => {
-  //     clearInterval(id);
-  //   };
-  // }, [slideIndex]);
+  // autoplay;
+  useEffect(() => {
+    const id = setInterval(() => {
+      moveToNextSlide();
+    }, interval);
+    return () => {
+      clearInterval(id);
+    };
+  }, [moveToNextSlide, slideIndex]);
 
   return (
     <>
@@ -68,7 +85,7 @@ export default function Carousel(props) {
           ref={slideContainer}
           className="slides"
           style={
-            slideIndex === 1 || slideIndex === slides.length - 2
+            skipTransition.current
               ? {
                   transition: "none",
                   transform: `translateX(-${slideWidth * slideIndex}px)`,
@@ -84,7 +101,6 @@ export default function Carousel(props) {
               <div
                 key={index}
                 className={`slide slide-${slides.indexOf(slide)} 
-                ${slides.indexOf(slide) === 0 ? "last-clone" : ""}
                 ${
                   slides.indexOf(slide) === slides.length - 1
                     ? "first-clone"

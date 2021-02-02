@@ -29,6 +29,7 @@ function cacheDom() {
   prevBtn = document.querySelector(".prev-btn");
   interval = 5000;
   slides = document.querySelectorAll(".slide");
+  console.log(slides);
   index = 0;
   slideWidth = slides[index].clientWidth || window.onresize;
   firstClone = slides[0].cloneNode(true);
